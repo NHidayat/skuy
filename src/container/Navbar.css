@@ -1,0 +1,57 @@
+@import "../App.css";
+
+a {
+  text-decoration: none;
+}
+.header {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  font-size: 14px;
+  box-shadow: rgb(0 0 0 / 7%) 0px 4px 6px -1px;
+}
+
+.header .navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.header .navbar .nav-logo a {
+  color: var(--primary-color);
+}
+.header .navbar .nav-menu {
+  color: var(--text-color);
+  align-self: center;
+}
+
+.nav-menu .menu-item {
+  position: relative;
+  padding: 4px 6px;
+  border-radius: 0.5rem;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.nav-menu .menu-item a {
+  color: var(--text-color);
+}
+
+.nav-menu .menu-item:hover {
+  background: #e8e8e8;
+}
+
+.badge {
+  min-width: 20px;
+  min-height: 20px;
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  background-color: rgb(239, 20, 74);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 18px;
+  position: absolute;
+  top: -11px;
+  right: 0px;
+}

@@ -36,6 +36,10 @@ a {
   color: var(--text-color);
 }
 
+.nav-menu .menu-item i {
+  font-size: 20px;
+}
+
 .nav-menu .menu-item:hover {
   background: #e8e8e8;
 }
@@ -52,6 +56,6 @@ a {
   border: 2px solid rgb(255, 255, 255);
   border-radius: 18px;
   position: absolute;
-  top: -11px;
+  top: -15px;
   right: 0px;
 }

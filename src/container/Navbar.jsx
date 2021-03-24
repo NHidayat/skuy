@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-// import { ShoppingBasketIcon } from "@material-ui/icons";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-
 const Navbar = () => {
   return (
     <nav className="header">
@@ -17,7 +14,7 @@ const Navbar = () => {
           <div className="nav-menu">
             <div className="menu-item">
               <Link to="/cart" title="Lihat Keranjang">
-                <ShoppingBasketIcon></ShoppingBasketIcon>
+                <i class="bx bxs-shopping-bag-alt"></i>
               </Link>
               <span className="badge">2</span>
             </div>

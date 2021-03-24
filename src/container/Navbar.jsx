@@ -16,9 +16,9 @@ const Navbar = () => {
           </div>
           <div className="nav-menu">
             <div className="menu-item">
-              <a href="/cart" title="Lihat Keranjang">
+              <Link to="/cart" title="Lihat Keranjang">
                 <ShoppingBasketIcon></ShoppingBasketIcon>
-              </a>
+              </Link>
               <span className="badge">2</span>
             </div>
           </div>

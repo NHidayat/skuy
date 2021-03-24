@@ -44,7 +44,7 @@
   color: #ffc200;
   margin-top: 0.5rem;
 }
-.card-body .rating svg {
+.card-body .rating i {
   font-size: 1rem;
 }
 
@@ -96,7 +96,7 @@
   align-items: center;
 }
 
-.product-detail .product-info .product-rating svg {
+.product-detail .product-info .product-rating i {
   color: #ffc200;
   font-size: 24px;
 }
@@ -137,7 +137,6 @@
 
 .product-action .quantity .sub-total {
   font-weight: 500;
-  font-size: 1.3rem;
 }
 
 .btn-qty {
@@ -152,7 +151,7 @@
   outline: none;
 }
 
-.btn-qty svg {
+.btn-qty i {
   font-size: 14px;
   font-weight: bold;
   color: #fff;

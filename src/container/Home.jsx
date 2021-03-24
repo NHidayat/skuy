@@ -1,8 +1,8 @@
-import { Star, StarBorderOutlined } from "@material-ui/icons";
 import "./Product.css";
 import { Link } from "react-router-dom";
 import { products } from "../data";
 import NumberFormat from "react-number-format";
+import StarRating from "./components/StarRating";
 
 function Home(props) {
   return (
@@ -28,11 +28,7 @@ function Home(props) {
                 />
               </span>
               <div className="rating">
-                <Star />
-                <Star />
-                <Star />
-                <Star />
-                <StarBorderOutlined />
+                <StarRating value={item.rating} />
               </div>
             </div>
           </div>

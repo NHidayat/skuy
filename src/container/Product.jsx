@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { products } from "../data";
-import { Remove, Star, Add } from "@material-ui/icons";
-// import  from "@material-ui/icons/Add";
 import NumberFormat from "react-number-format";
+import StarRating from "./components/StarRating";
 
 function Product(props) {
   const id = props.match.params.id;
   const data = products.find((x) => x.id === Number(id));
+  const [qty, setQty] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+
+  const changeQty = (e) => {
+    if (e === "up") {
+      setQty(qty + 1);
+      setSubtotal(subtotal + data.price);
+    }
+    if (e === "down") {
+      if (qty > 0) {
+        setQty(qty - 1);
+        setSubtotal(subtotal - data.price);
+      }
+    }
+  };
 
   return (
     <div className="container">
@@ -17,10 +31,7 @@ function Product(props) {
         <div className="product-info">
           <div className="product-name">{data.name}</div>
           <div className="product-rating">
-            <Star />
-            <span>
-              {data.rating} <small>({data.numReviewer} Review)</small>
-            </span>
+            <StarRating value={data.rating} />
           </div>
           <div className="product-price">
             <NumberFormat
@@ -41,17 +52,17 @@ function Product(props) {
           </div>
           <div className="quantity">
             <div className="qty">
-              <button className="btn-qty">
-                <Remove />
+              <button className="btn-qty" onClick={() => changeQty("down")}>
+                <i className="bx bx-minus"></i>
               </button>
-              <span className="num-qty">1</span>
-              <button className="btn-qty">
-                <Add />
+              <span className="num-qty">{qty}</span>
+              <button className="btn-qty" onClick={() => changeQty("up")}>
+                <i className="bx bx-plus"></i>
               </button>
             </div>
             <div className="sub-total">
               <NumberFormat
-                value={data.price}
+                value={subtotal}
                 thousandSeparator={true}
                 prefix={"Rp"}
                 displayType={"text"}
@@ -59,7 +70,13 @@ function Product(props) {
             </div>
           </div>
           <div className="btn-section">
-            <button className="btn btn-primary btn-full">+ Keranjang</button>
+            {qty ? (
+              <button className="btn btn-primary btn-full">+ Keranjang</button>
+            ) : (
+              <button className="btn btn-primary btn-full" disabled>
+                + Keranjang
+              </button>
+            )}
           </div>
         </div>
       </div>

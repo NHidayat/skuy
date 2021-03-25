@@ -1,32 +1,44 @@
-import React, { Component } from "react";
-import { Star, StarBorderOutlined } from "@material-ui/icons";
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { formatNum } from "../../utility/function";
+import StarRating from "./StarRating";
 
-class CardProduct extends Component {
-  render() {
-    return (
-      <div className="product-card">
+import { connect } from "react-redux";
+import { loadCurrentItem } from "../../redux/Shopping/shopping-actions";
+
+const CardProduct = ({ data, loadCurrentItem }) => {
+  return (
+    <Fragment>
+      <div className="product-card" key={data.id}>
         <div className="card-image">
-          <img
-            src="https://lh3.googleusercontent.com/proxy/COWFf1wAwq6p5cCYFoFiQdDOTGcHoB-ydiSsNpkAJsaphBoHqryrQF7xJxLQVAnWWpRAZC5fGMzhHSKIX3Of9ajAmr9169RMWZ1v_ciHJMCuG6g"
-            alt="shoes"
-          />
+          <Link
+            to={"/product/" + data.id}
+            onClick={() => loadCurrentItem(data)}
+          >
+            <img src={"img/" + data.image} alt="shoes" />
+          </Link>
         </div>
         <div className="card-body">
-          <div className="product-title">
-            Lorem ipsum dolor sit, amet consectetur adipisicing.
-          </div>
-          <span className="price">Rp. 650.000</span>
+          <Link
+            to={"/product/" + data.id}
+            onClick={() => loadCurrentItem(data)}
+          >
+            <div className="title">{data.name}</div>
+          </Link>
+          <span className="price">{formatNum(data.price)}</span>
           <div className="rating">
-            <Star />
-            <Star />
-            <Star />
-            <Star />
-            <StarBorderOutlined />
+            <StarRating value={data.rating} />
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </Fragment>
+  );
+};
 
-export default CardProduct;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadCurrentItem: (item) => dispatch(loadCurrentItem(item)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CardProduct);

@@ -6,8 +6,9 @@ body {
 :root {
   --primary-color: #03ac0e;
   --dark-primary-color: #009900;
-  --text-color: #6c727c;
-  color: #6c727c;
+  --text-color: #46484b;
+  --border-light: 1px solid rgb(229, 231, 233);
+  color: #46484b;
 }
 ::after,
 ::before {
@@ -28,6 +29,7 @@ body {
   font-size: 14px;
   font-weight: 600;
   transition: 0.5s ease;
+  text-align: center;
 }
 
 .btn-primary {
@@ -41,6 +43,10 @@ body {
 
 .btn-full {
   width: 100%;
+}
+
+.btn-lg {
+  padding: 14px;
 }
 
 button:disabled,

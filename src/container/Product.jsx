@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import { products } from "../data";
-import NumberFormat from "react-number-format";
+import { formatNum } from "../utility/function";
 import StarRating from "./components/StarRating";
 
-function Product(props) {
-  const id = props.match.params.id;
-  const data = products.find((x) => x.id === Number(id));
+import { connect } from "react-redux";
+import { addToCart } from "../redux/Shopping/shopping-actions";
+
+const Product = ({ currentItem, addToCart }) => {
   const [qty, setQty] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
 
   const changeQty = (e) => {
     if (e === "up") {
       setQty(qty + 1);
-      setSubtotal(subtotal + data.price);
+      setSubtotal(subtotal + currentItem.price);
     }
     if (e === "down") {
       if (qty > 0) {
         setQty(qty - 1);
-        setSubtotal(subtotal - data.price);
+        setSubtotal(subtotal - currentItem.price);
       }
     }
   };
@@ -26,24 +26,17 @@ function Product(props) {
     <div className="container">
       <div className="product-detail">
         <div className="product-image">
-          <img src={"/img/" + data.image} alt="product" />
+          <img src={"/img/" + currentItem.image} alt="product" />
         </div>
         <div className="product-info">
-          <div className="product-name">{data.name}</div>
+          <div className="product-name">{currentItem.name}</div>
           <div className="product-rating">
-            <StarRating value={data.rating} />
+            <StarRating value={currentItem.rating} />
           </div>
-          <div className="product-price">
-            <NumberFormat
-              value={data.price}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"Rp"}
-            />
-          </div>
+          <div className="product-price">{formatNum(currentItem.price)}</div>
           <div className="product-description">
             <span>Description</span>
-            <p>{data.description}</p>
+            <p>{currentItem.description}</p>
           </div>
         </div>
         <div className="product-action">
@@ -60,18 +53,16 @@ function Product(props) {
                 <i className="bx bx-plus"></i>
               </button>
             </div>
-            <div className="sub-total">
-              <NumberFormat
-                value={subtotal}
-                thousandSeparator={true}
-                prefix={"Rp"}
-                displayType={"text"}
-              />
-            </div>
+            <div className="sub-total">{formatNum(subtotal)}</div>
           </div>
           <div className="btn-section">
             {qty ? (
-              <button className="btn btn-primary btn-full">+ Keranjang</button>
+              <button
+                onClick={() => addToCart(currentItem.id, qty)}
+                className="btn btn-primary btn-full"
+              >
+                + Keranjang
+              </button>
             ) : (
               <button className="btn btn-primary btn-full" disabled>
                 + Keranjang
@@ -82,6 +73,18 @@ function Product(props) {
       </div>
     </div>
   );
-}
+};
 
-export default Product;
+const mapStateToProps = (state) => {
+  return {
+    currentItem: state.shop.currentItem,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id, qty) => dispatch(addToCart(id, qty)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

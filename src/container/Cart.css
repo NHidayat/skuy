@@ -1,0 +1,146 @@
+.cart-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cart-section > div {
+  padding: 20px;
+  margin: 10px;
+}
+
+.cart {
+  border: var(--border-light);
+  border-radius: 8px;
+  flex: 2;
+}
+
+.cart .cart-header {
+  font-size: 21px;
+  font-weight: 600;
+  border-bottom: var(--border-light);
+  padding: 10px 0;
+}
+.cart .cart-body .list-item > div {
+  margin: 20px 0;
+}
+
+.cart-body .list-item .cart-item {
+  max-width: 800px;
+  display: grid;
+  grid-gap: 10px;
+  align-items: center;
+  grid-template-columns: 0.5fr 2fr 1fr;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #dbdbdb;
+  padding: 10px 0;
+}
+
+.cart-item .item-image img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-item .item-body {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.cart-item .item-body > span {
+  display: block;
+  margin: 10px 0;
+}
+
+.cart-item .item-body .price {
+  font-weight: 500;
+}
+
+.cart-item .item-action {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.list-item .remove-item {
+  text-align: right;
+}
+
+.list-item .remove-item i {
+  font-size: 20px;
+  cursor: pointer;
+  color: #a9a9a9;
+}
+
+@media (max-width: 767px) {
+  .cart-section {
+    flex-direction: column;
+  }
+
+  .cart-section > div {
+    margin: 0;
+  }
+
+  .cart-item .item-image img {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+@media (max-width: 425px) {
+  .cart-item .item-image {
+    grid-area: image;
+  }
+  .cart-item .item-body {
+    grid-area: body;
+  }
+  .cart-item .item-action {
+    grid-area: action;
+  }
+
+  .cart-item {
+    display: grid;
+    justify-content: ;
+    grid-template-areas:
+      "image body body body"
+      "image body body body"
+      "image action action action";
+  }
+}
+
+.calculation-box {
+  border: var(--border-light);
+  border-radius: 8px;
+  flex: 0.8;
+}
+
+.calculation-box > div {
+  padding: 10px 0;
+}
+
+.calculation-box .title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.calculation-box .box-body {
+  font-size: 14px;
+}
+
+.calculation-box .box-footer > div {
+  padding: 10px 0;
+}
+
+.calculation-box .box-footer .total {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calculation-box .box-footer .btn-section {
+  display: flex;
+}

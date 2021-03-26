@@ -7,7 +7,11 @@ function StarRating(props) {
       {[...Array(parseInt(props.value)).keys()].map((x) => (
         <i className="bx bxs-star" key={x}></i>
       ))}
-      {!Number.isInteger(props.value) && <i className="bx bxs-star-half"></i>}
+      {!Number.isInteger(props.value) ? (
+        <i className="bx bxs-star-half"></i>
+      ) : (
+        <i class="bx bx-star"></i>
+      )}
     </Fragment>
   );
 }

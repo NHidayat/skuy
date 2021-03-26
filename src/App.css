@@ -19,6 +19,10 @@ body {
   margin-top: 50px;
 }
 
+.mx-m {
+  margin: 0 0.3rem;
+}
+
 .btn {
   padding: 10px;
   box-sizing: border-box;
@@ -37,6 +41,12 @@ body {
   background: var(--primary-color);
 }
 
+.btn-o-primary {
+  color: var(--primary-color);
+  background: #fff;
+  border: 1px solid var(--primary-color);
+}
+
 .btn-primary:hover {
   background: var(--dark-primary-color);
 }
@@ -49,9 +59,11 @@ body {
   padding: 14px;
 }
 
+.disabled,
 button:disabled,
 button[disabled] {
   opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {
@@ -81,4 +93,13 @@ button[disabled] {
 
 .main-content {
   margin-top: 2rem;
+}
+
+.custom-modal-header,
+.custom-modal-btn {
+  text-align: center;
+}
+
+.react-responsive-modal-modal {
+  border-radius: 8px;
 }

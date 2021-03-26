@@ -1,13 +1,26 @@
 import React, { useState } from "react";
 import { formatNum } from "../utility/function";
 import StarRating from "./components/StarRating";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 
 import { connect } from "react-redux";
 import { addToCart } from "../redux/Shopping/shopping-actions";
+import { Link } from "react-router-dom";
 
 const Product = ({ currentItem, addToCart }) => {
   const [qty, setQty] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
+  const [openModal, setModal] = useState(0);
+
+  if (!currentItem) {
+    window.location.replace("/");
+  }
+
+  const add = (id, qty) => {
+    addToCart(id, qty);
+    setModal(1);
+  };
 
   const changeQty = (e) => {
     if (e === "up") {
@@ -58,7 +71,7 @@ const Product = ({ currentItem, addToCart }) => {
           <div className="btn-section">
             {qty ? (
               <button
-                onClick={() => addToCart(currentItem.id, qty)}
+                onClick={() => add(currentItem.id, qty)}
                 className="btn btn-primary btn-full"
               >
                 + Keranjang
@@ -71,6 +84,26 @@ const Product = ({ currentItem, addToCart }) => {
           </div>
         </div>
       </div>
+      <Modal
+        className="custom-modal"
+        open={openModal}
+        onClose={() => setModal(0)}
+        closeIcon={"x"}
+        center
+      >
+        <div className="custom-modal-header">
+          <img src="/cart-success.png" alt="" />
+          <h3>Dimasukkan ke Keranjang Anda</h3>
+        </div>
+        <div className="custom-modal-btn">
+          <button onClick={() => setModal(0)} className="btn btn-o-primary">
+            Lanjut Belanja
+          </button>{" "}
+          <Link to="/cart" className="btn btn-primary" on>
+            Cek Keranjang
+          </Link>
+        </div>
+      </Modal>
     </div>
   );
 };

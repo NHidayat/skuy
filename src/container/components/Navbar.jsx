@@ -28,8 +28,8 @@ const Navbar = ({ cart }) => {
             <div className="menu-item">
               <Link to="/cart" title="Lihat Keranjang">
                 <i className="bx bxs-shopping-bag-alt"></i>
+                <span className="badge">{totalItems}</span>
               </Link>
-              <span className="badge">{totalItems}</span>
             </div>
           </div>
         </div>

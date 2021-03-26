@@ -16,11 +16,25 @@
 }
 
 .cart .cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: var(--border-light);
+}
+
+.cart .cart-header .title {
   font-size: 21px;
   font-weight: 600;
-  border-bottom: var(--border-light);
-  padding: 10px 0;
 }
+
+.cart .cart-header .action {
+  color: #a9a9a9;
+  font-size: 0.9rem;
+  font-weight: normal;
+  cursor: pointer;
+}
+
 .cart .cart-body .list-item > div {
   margin: 20px 0;
 }

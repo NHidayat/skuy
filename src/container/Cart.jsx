@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import "./Cart.css";
 import { formatNum } from "../utility/function";
 import { Modal } from "react-responsive-modal";
@@ -7,8 +7,24 @@ import CartItem from "./components/CartItem";
 import { connect } from "react-redux";
 import { clearCart, selectedAll } from "../redux/Shopping/shopping-actions";
 
-function Cart({ cart, clearCart, cartCount, totalPrice, selectedAll }) {
+function Cart({
+  cart,
+  clearCart,
+  cartCount,
+  totalPrice,
+  selectedAll,
+  removeSelectedItem,
+}) {
   const [openModal, setModal] = useState(0);
+  const [allSelect, setAllSelect] = useState(true);
+
+  useEffect(() => {
+    let selected = [];
+    cart.forEach((e) => {
+      e.selected === true && selected.push(e);
+    });
+    selected.length === cart.length ? setAllSelect(true) : setAllSelect(false);
+  }, [cart]);
 
   const clear = () => {
     clearCart();
@@ -38,10 +54,11 @@ function Cart({ cart, clearCart, cartCount, totalPrice, selectedAll }) {
                       type="checkbox"
                       onChange={(e) => handleSelectAll(e)}
                       id="selectAll"
+                      checked={allSelect}
                     />{" "}
                     <label htmlFor="selectAll">Pilih semua</label>
                   </div>
-                  <div onClick={() => setModal(1)}>
+                  <div onClick={() => clearCart()}>
                     <span>Kosongkan</span> <i className="bx bx-x-circle"></i>
                   </div>
                 </div>

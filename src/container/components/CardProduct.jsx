@@ -13,10 +13,7 @@ const CardProduct = ({ data, loadCurrentItem }) => {
           </Link>
         </div>
         <div className="card-body">
-          <Link
-            to={"/product/" + data.id}
-            onClick={() => loadCurrentItem(data)}
-          >
+          <Link to={"/product/" + data.id}>
             <div className="title">{data.name}</div>
           </Link>
           <span className="price">{formatNum(data.price)}</span>

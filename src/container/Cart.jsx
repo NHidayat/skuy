@@ -58,7 +58,7 @@ function Cart({
                     />{" "}
                     <label htmlFor="selectAll">Pilih semua</label>
                   </div>
-                  <div onClick={() => clearCart()}>
+                  <div onClick={() => setModal(true)}>
                     <span>Kosongkan</span> <i className="bx bx-x-circle"></i>
                   </div>
                 </div>

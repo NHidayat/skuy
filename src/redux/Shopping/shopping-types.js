@@ -3,3 +3,5 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const ADJUST_QTY = "ADJUST_QTY";
 export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";
 export const CLEAR_CART = "CLEAR_CART";
+export const ADJUST_SELECTED = "ADJUST_SELECTED";
+export const SELECTED_ALL = "SELECTED_ALL";

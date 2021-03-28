@@ -13,7 +13,7 @@ const CardProduct = ({ data, loadCurrentItem }) => {
         <div className="card-image">
           <Link
             to={"/product/" + data.id}
-            onClick={() => loadCurrentItem(data)}
+            // onClick={() => loadCurrentItem(data)}
           >
             <img src={"img/" + data.image} alt="shoes" />
           </Link>

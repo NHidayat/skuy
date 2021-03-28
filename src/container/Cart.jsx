@@ -1,27 +1,14 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import "./Cart.css";
 import { formatNum } from "../utility/function";
 import { Modal } from "react-responsive-modal";
 import CartItem from "./components/CartItem";
 
 import { connect } from "react-redux";
-import { clearCart } from "../redux/Shopping/shopping-actions";
+import { clearCart, selectedAll } from "../redux/Shopping/shopping-actions";
 
-function Cart({ cart, clearCart }) {
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
+function Cart({ cart, clearCart, cartCount, totalPrice, selectedAll }) {
   const [openModal, setModal] = useState(0);
-
-  useEffect(() => {
-    let price = 0;
-    let items = 0;
-    cart.forEach((item) => {
-      price += item.qty * item.price;
-      items += item.qty;
-    });
-    setTotalPrice(price);
-    setTotalItems(items);
-  }, [cart, totalPrice, setTotalPrice, totalItems, totalItems]);
 
   const clear = () => {
     clearCart();
@@ -33,6 +20,10 @@ function Cart({ cart, clearCart }) {
     window.location.replace("/");
   };
 
+  const handleSelectAll = (e) => {
+    selectedAll(e.target.checked);
+  };
+
   return (
     <Fragment>
       <div className="container">
@@ -41,8 +32,18 @@ function Cart({ cart, clearCart }) {
             <div className="cart-header">
               <div className="title">Keranjang</div>
               {cart.length > 0 ? (
-                <div className="action" onClick={() => setModal(1)}>
-                  <span>Kosongkan</span> <i class="bx bx-x-circle"></i>
+                <div className="action">
+                  <div>
+                    <input
+                      type="checkbox"
+                      onChange={(e) => handleSelectAll(e)}
+                      id="selectAll"
+                    />{" "}
+                    <label htmlFor="selectAll">Pilih semua</label>
+                  </div>
+                  <div onClick={() => setModal(1)}>
+                    <span>Kosongkan</span> <i className="bx bx-x-circle"></i>
+                  </div>
                 </div>
               ) : null}
             </div>
@@ -63,7 +64,7 @@ function Cart({ cart, clearCart }) {
               <span className="title">Ringkasan Belanja</span>
             </div>
             <div className="box-body">
-              <span>Total Item : {totalItems} barang</span>
+              <span>Total Item : {cartCount} barang</span>
             </div>
             <div className="box-footer">
               <div className="total">
@@ -113,12 +114,15 @@ function Cart({ cart, clearCart }) {
 const mapStateToProps = (state) => {
   return {
     cart: state.shop.cart,
+    cartCount: state.shop.cartCount,
+    totalPrice: state.shop.totalPrice,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     clearCart: () => dispatch(clearCart()),
+    selectedAll: (value) => dispatch(selectedAll(value)),
   };
 };
 

@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 import { connect } from "react-redux";
 
-const Navbar = ({ cart }) => {
-  const [totalItems, setTotalItems] = useState(0);
-
-  useEffect(() => {
-    let items = 0;
-    cart.forEach((item) => {
-      items += item.qty;
-    });
-    setTotalItems(items);
-  }, [cart, totalItems, totalItems]);
-
+const Navbar = ({ cartCount }) => {
   return (
     <nav className="header">
       <div className="container">
@@ -28,7 +17,7 @@ const Navbar = ({ cart }) => {
             <div className="menu-item">
               <Link to="/cart" title="Lihat Keranjang">
                 <i className="bx bxs-shopping-bag-alt"></i>
-                <span className="badge">{totalItems}</span>
+                <span className="badge">{cartCount}</span>
               </Link>
             </div>
           </div>
@@ -39,7 +28,7 @@ const Navbar = ({ cart }) => {
 };
 const mapStateToProps = (state) => {
   return {
-    cart: state.shop.cart,
+    cartCount: state.shop.cartCount,
   };
 };
 export default connect(mapStateToProps)(Navbar);

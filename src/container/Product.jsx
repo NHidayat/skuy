@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatNum } from "../utility/function";
 import StarRating from "./components/StarRating";
 import "react-responsive-modal/styles.css";
@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { addToCart } from "../redux/Shopping/shopping-actions";
 import { Link } from "react-router-dom";
 
-const Product = ({ currentItem, addToCart }) => {
+const Product = ({ currentItem, addToCart, productId }) => {
   const [qty, setQty] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [openModal, setModal] = useState(0);
@@ -16,6 +16,10 @@ const Product = ({ currentItem, addToCart }) => {
   if (!currentItem) {
     window.location.replace("/");
   }
+
+  useEffect(() => {
+    console.log(productId);
+  }, [productId]);
 
   const add = (id, qty) => {
     addToCart(id, qty);
@@ -108,9 +112,11 @@ const Product = ({ currentItem, addToCart }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const { id } = ownProps.match.params;
   return {
     currentItem: state.shop.currentItem,
+    productId: id,
   };
 };
 

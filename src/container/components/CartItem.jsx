@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import {
   removeFromCart,
   adjustQty,
+  adjustSelected,
 } from "../../redux/Shopping/shopping-actions";
 
-const CartItem = ({ itemData, removeFromCart, adjustQty }) => {
+const CartItem = ({ itemData, removeFromCart, adjustQty, adjustSelected }) => {
   const [input, setInput] = useState(itemData.qty);
 
   const handleChange = (e) => {
@@ -30,6 +31,15 @@ const CartItem = ({ itemData, removeFromCart, adjustQty }) => {
         ></i>
       </div>
       <div className="cart-item">
+        <div className="checkbox">
+          <input
+            type="checkbox"
+            checked={itemData.selected}
+            onChange={() => true}
+            onClick={() => adjustSelected(itemData.id)}
+          />
+          <span className="checkmark"></span>
+        </div>
         <div className="item-image">
           <img src={"/img/" + itemData.image} alt="" />
         </div>
@@ -55,6 +65,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     removeFromCart: (id) => dispatch(removeFromCart(id)),
     adjustQty: (id, value) => dispatch(adjustQty(id, value)),
+    adjustSelected: (id) => dispatch(adjustSelected(id)),
   };
 };
 

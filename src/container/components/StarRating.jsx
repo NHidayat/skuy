@@ -10,7 +10,7 @@ function StarRating(props) {
       {!Number.isInteger(props.value) ? (
         <i className="bx bxs-star-half"></i>
       ) : (
-        <i class="bx bx-star"></i>
+        <i className="bx bx-star"></i>
       )}
     </Fragment>
   );

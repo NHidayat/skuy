@@ -41,3 +41,21 @@ export const clearCart = () => {
     type: actionTypes.CLEAR_CART,
   };
 };
+
+export const adjustSelected = (id) => {
+  return {
+    type: actionTypes.ADJUST_SELECTED,
+    payload: {
+      id: id,
+    },
+  };
+};
+
+export const selectedAll = (value) => {
+  return {
+    type: actionTypes.SELECTED_ALL,
+    payload: {
+      value: value,
+    },
+  };
+};

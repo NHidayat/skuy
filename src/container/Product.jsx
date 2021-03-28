@@ -5,25 +5,21 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 
 import { connect } from "react-redux";
-import { addToCart } from "../redux/Shopping/shopping-actions";
+import { addToCart, loadCurrentItem } from "../redux/Shopping/shopping-actions";
 import { Link } from "react-router-dom";
 
-const Product = ({ currentItem, addToCart, productId }) => {
+const Product = ({ currentItem, addToCart, productId, loadCurrentItem }) => {
   const [qty, setQty] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
-  const [openModal, setModal] = useState(0);
-
-  if (!currentItem) {
-    window.location.replace("/");
-  }
+  const [openModal, setModal] = useState(false);
 
   useEffect(() => {
-    console.log(productId);
-  }, [productId]);
+    loadCurrentItem(productId);
+  }, [loadCurrentItem, productId]);
 
   const add = (id, qty) => {
     addToCart(id, qty);
-    setModal(1);
+    setModal(true);
   };
 
   const changeQty = (e) => {
@@ -41,57 +37,59 @@ const Product = ({ currentItem, addToCart, productId }) => {
 
   return (
     <div className="container">
-      <div className="product-detail">
-        <div className="product-image">
-          <img src={"/img/" + currentItem.image} alt="product" />
-        </div>
-        <div className="product-info">
-          <div className="product-name">{currentItem.name}</div>
-          <div className="product-rating">
-            <StarRating value={currentItem.rating} />
+      {currentItem && (
+        <div className="product-detail">
+          <div className="product-image">
+            <img src={"/img/" + currentItem.image} alt="product" />
           </div>
-          <div className="product-price">{formatNum(currentItem.price)}</div>
-          <div className="product-description">
-            <span>Description</span>
-            <p>{currentItem.description}</p>
-          </div>
-        </div>
-        <div className="product-action">
-          <div className="title">
-            <span>Atur jumlah</span>
-          </div>
-          <div className="quantity">
-            <div className="qty">
-              <button className="btn-qty" onClick={() => changeQty("down")}>
-                <i className="bx bx-minus"></i>
-              </button>
-              <span className="num-qty">{qty}</span>
-              <button className="btn-qty" onClick={() => changeQty("up")}>
-                <i className="bx bx-plus"></i>
-              </button>
+          <div className="product-info">
+            <div className="product-name">{currentItem.name}</div>
+            <div className="product-rating">
+              <StarRating value={currentItem.rating} />
             </div>
-            <div className="sub-total">{formatNum(subtotal)}</div>
+            <div className="product-price">{formatNum(currentItem.price)}</div>
+            <div className="product-description">
+              <span>Description</span>
+              <p>{currentItem.description}</p>
+            </div>
           </div>
-          <div className="btn-section">
-            {qty ? (
-              <button
-                onClick={() => add(currentItem.id, qty)}
-                className="btn btn-primary btn-full"
-              >
-                + Keranjang
-              </button>
-            ) : (
-              <button className="btn btn-primary btn-full" disabled>
-                + Keranjang
-              </button>
-            )}
+          <div className="product-action">
+            <div className="title">
+              <span>Atur jumlah</span>
+            </div>
+            <div className="quantity">
+              <div className="qty">
+                <button className="btn-qty" onClick={() => changeQty("down")}>
+                  <i className="bx bx-minus"></i>
+                </button>
+                <span className="num-qty">{qty}</span>
+                <button className="btn-qty" onClick={() => changeQty("up")}>
+                  <i className="bx bx-plus"></i>
+                </button>
+              </div>
+              <div className="sub-total">{formatNum(subtotal)}</div>
+            </div>
+            <div className="btn-section">
+              {qty ? (
+                <button
+                  onClick={() => add(currentItem.id, qty)}
+                  className="btn btn-primary btn-full"
+                >
+                  + Keranjang
+                </button>
+              ) : (
+                <button className="btn btn-primary btn-full" disabled>
+                  + Keranjang
+                </button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <Modal
         className="custom-modal"
         open={openModal}
-        onClose={() => setModal(0)}
+        onClose={() => setModal(false)}
         closeIcon={"x"}
         center
       >
@@ -100,7 +98,7 @@ const Product = ({ currentItem, addToCart, productId }) => {
           <h3>Dimasukkan ke Keranjang Anda</h3>
         </div>
         <div className="custom-modal-btn">
-          <button onClick={() => setModal(0)} className="btn btn-o-primary">
+          <button onClick={() => setModal(false)} className="btn btn-o-primary">
             Lanjut Belanja
           </button>{" "}
           <Link to="/cart" className="btn btn-primary" on>
@@ -123,6 +121,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (id, qty) => dispatch(addToCart(id, qty)),
+    loadCurrentItem: (id) => dispatch(loadCurrentItem(id)),
   };
 };
 

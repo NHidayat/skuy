@@ -34,7 +34,7 @@ const shopReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.ADD_TO_CART:
       // get data
       const item = state.products.find((prod) => prod.id === action.payload.id);
-      // check
+      // checking
       const inCart = state.cart.find((i) =>
         i.id === action.payload.id ? true : false
       );
@@ -81,9 +81,12 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         totalPrice: countTotalPrice(state.cart),
       };
     case actionTypes.LOAD_CURRENT_ITEM:
+      const productData = state.products.find(
+        (x) => x.id === parseInt(action.payload.id)
+      );
       return {
         ...state,
-        currentItem: action.payload,
+        currentItem: productData,
       };
     case actionTypes.CLEAR_CART:
       return {

@@ -3,18 +3,12 @@ import { Link } from "react-router-dom";
 import { formatNum } from "../../utility/function";
 import StarRating from "./StarRating";
 
-import { connect } from "react-redux";
-import { loadCurrentItem } from "../../redux/Shopping/shopping-actions";
-
 const CardProduct = ({ data, loadCurrentItem }) => {
   return (
     <Fragment>
       <div className="product-card" key={data.id}>
         <div className="card-image">
-          <Link
-            to={"/product/" + data.id}
-            // onClick={() => loadCurrentItem(data)}
-          >
+          <Link to={"/product/" + data.id}>
             <img src={"img/" + data.image} alt="shoes" />
           </Link>
         </div>
@@ -35,10 +29,4 @@ const CardProduct = ({ data, loadCurrentItem }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadCurrentItem: (item) => dispatch(loadCurrentItem(item)),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(CardProduct);
+export default CardProduct;

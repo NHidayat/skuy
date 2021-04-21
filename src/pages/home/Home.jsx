@@ -1,5 +1,5 @@
-import "./Product.css";
-import CardProduct from "./components/CardProduct";
+import "../product/Product.css";
+import CardProduct from "../../components/CardProduct";
 
 import { connect } from "react-redux";
 

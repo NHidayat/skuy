@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { formatNum } from "../../utility/function";
+import { formatNum } from "../utility/function";
 import StarRating from "./StarRating";
 
 const CardProduct = ({ data, loadCurrentItem }) => {

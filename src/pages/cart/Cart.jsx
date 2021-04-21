@@ -1,11 +1,11 @@
 import React, { useState, Fragment, useEffect } from "react";
 import "./Cart.css";
-import { formatNum } from "../utility/function";
+import { formatNum } from "../../utility/function";
 import { Modal } from "react-responsive-modal";
-import CartItem from "./components/CartItem";
+import CartItem from "./CartItem";
 
 import { connect } from "react-redux";
-import { clearCart, selectedAll } from "../redux/Shopping/shopping-actions";
+import { clearCart, selectedAll } from "../../redux/Shopping/shopping-actions";
 
 function Cart({
   cart,

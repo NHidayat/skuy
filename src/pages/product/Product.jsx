@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { formatNum } from "../utility/function";
-import StarRating from "./components/StarRating";
+import { formatNum } from "../../utility/function";
+import StarRating from "../../components/StarRating";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 
 import { connect } from "react-redux";
-import { addToCart, loadCurrentItem } from "../redux/Shopping/shopping-actions";
+import {
+  addToCart,
+  loadCurrentItem,
+} from "../../redux/Shopping/shopping-actions";
 import { Link } from "react-router-dom";
 
 const Product = ({ currentItem, addToCart, productId, loadCurrentItem }) => {

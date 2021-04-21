@@ -1,10 +1,10 @@
 import "./App.css";
-import Navbar from "./container/components/Navbar";
+import Navbar from "./components/Navbar";
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
-import Home from "./container/Home";
-import Product from "./container/Product";
-import Cart from "./container/Cart";
+import Home from "./pages/home/Home";
+import Product from "./pages/product/Product";
+import Cart from "./pages/cart/Cart";
 
 function App() {
   return (
